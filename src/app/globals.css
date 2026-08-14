@@ -1,26 +1,155 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #0f172a;
+  --foreground: #f8fafc;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+}
+
+/* A4 Page Emulation (Screen Editor Mode) */
+.a4-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  padding: 30px;
+  background: #1e293b;
+  overflow-y: auto;
+  height: 100%;
+}
+
+.a4-page {
+  position: relative;
+  width: 210mm;
+  min-height: 297mm;
+  padding: 15mm;
+  background: #ffffff;
+  color: #000000;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.4);
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-family: 'Times New Roman', 'SutonnyMJ', 'SolaimanLipi', Kalpurush, Serif;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+/* Page Break Indicator for Editor */
+.a4-page::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: repeating-linear-gradient(90deg, #3b82f6, #3b82f6 10px, transparent 10px, transparent 20px);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.a4-page:hover::after {
+  opacity: 0.8;
+}
+
+/* Specific exam layout utilities */
+.exam-header {
+  border: 2px solid #000000;
+  border-radius: 12px;
+  padding: 10px 15px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.exam-grid-box {
+  border: 1px solid #000000;
+  width: 100%;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.exam-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.exam-table th, .exam-table td {
+  border: 1px solid #000000;
+  padding: 8px;
+  text-align: center;
+}
+
+.matching-line-container {
+  position: relative;
+}
+
+/* Print Overrides */
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+  
+  .no-print {
+    display: none !important;
+  }
+  
+  .a4-container {
+    padding: 0 !important;
+    background: transparent !important;
+    overflow: visible !important;
+    height: auto !important;
+    display: block !important;
+  }
+
+  .a4-page {
+    width: 210mm !important;
+    height: 297mm !important;
+    min-height: 297mm !important;
+    padding: 12mm !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+    page-break-after: always;
+    page-break-inside: avoid;
+    float: none;
+  }
+
+  /* Keep table borders and colors visible */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #475569;
 }
