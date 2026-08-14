@@ -674,7 +674,7 @@ export default function PaperPreview({
                                           handleQuestionChange(q.id, { ...q, content: { ...imgData, items: newItems } });
                                         }}
                                         className="w-full text-center text-xs font-semibold border-none outline-none focus:bg-slate-100 text-black"
-                                        placeholder="Answer Box"
+                                        placeholder=""
                                       />
                                     </div>
                                   </div>
